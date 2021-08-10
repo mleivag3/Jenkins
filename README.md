@@ -1,10 +1,13 @@
 # automatizar-bk-volumes-docker-jenkins
 PIpeline en jenkins para automatizar 
 
-# Pipeline
+# Pipeline 
 
 pipeline {
+     
     agent {label'miserver'}
+    
+    
     stages {
               //Detener contedor para sacar bk al volumen
         stage ("detener docker"){
