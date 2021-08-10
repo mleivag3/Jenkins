@@ -1,5 +1,5 @@
 # automatizar-bk-volumes-docker-jenkins
-PIpeline en jenkins para automatizar 
+PIpeline en jenkins para automatizar bk de volumenes con script .sh escrito en python
 
 # Pipeline 
 
