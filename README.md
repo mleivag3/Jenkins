@@ -3,29 +3,41 @@ PIpeline en jenkins para automatizar bk de volumenes con script .sh escrito en p
 
 # Pipeline 
 
+
 pipeline {
-     
-    agent {label'miserver'}
     
     
+    gent {label'miserver'}
+     environment{
+        fichero = fileExists file: "/home/randi/Desktop/data231.tar" 
+ }
+ 
     stages {
+
+        stage ("eliminar bk antiguo"){
+            when{expression {fichero=='true'}}
+            steps{ 
+                sh 'rm -R $ruta/home/randi/Desktop/data231.tar'
+            }
+        }
               //Detener contedor para sacar bk al volumen
         stage ("detener docker"){
             steps{ 
                 sh 'docker stop data23'
             }
-        }      
+        }
+    
+        
         stage ("ejecucion del script "){
-         steps{ 
-         sh './docker-volumes.sh data23 save /home/randi/Desktop/data231.tar'
-           }
-      }
+            steps{ 
+                sh './docker-volumes.sh data23 save /home/randi/Desktop/data231.tar'
+            }
+        }
        stage ("Iniciar Docker" ){
-         steps{ 
-         sh 'docker start data23'
-           }
-      }
+             steps{ 
+                sh 'docker start data23'
+            }
+        }
     }
-    }
-  
-  
+        
+}
